@@ -1,0 +1,217 @@
+/* Modern Material Design Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+:root {
+    --primary-color: #3b82f6; /* Blue-500 */
+    --primary-dark: #1d4ed8; /* Blue-700 */
+    --secondary-color: #6b7280; /* Gray-500 */
+    --surface-color: #ffffff; /* White */
+    --background-color: #f3f4f6; /* Gray-100 */
+    --success-color: #10b981; /* Green-500 */
+    --warning-color: #f59e0b; /* Yellow-500 */
+    --error-color: #ef4444; /* Red-500 */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: #1f2937; /* Gray-900 */
+    line-height: 1.5;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-sm);
+}
+
+header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827; /* Gray-900 */
+}
+
+/* Card Styles */
+.mdc-card {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mdc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.mdc-card h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #1f2937; /* Gray-900 */
+    margin-bottom: 1rem;
+}
+
+.mdc-card p {
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* Button Styles */
+.mdc-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--surface-color);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.mdc-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.mdc-button:active {
+    transform: translateY(0);
+}
+
+.mdc-button .material-icons {
+    margin-right: 0.5rem;
+}
+
+/* Status Messages */
+#generateStatus,
+#templateStatus,
+#validationStatus {
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+    min-height: 1.5rem;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+thead {
+    background-color: #f9fafb; /* Gray-50 */
+}
+
+th {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280; /* Gray-500 */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+}
+
+tbody tr {
+    background-color: var(--surface-color);
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #f9fafb; /* Gray-50 */
+}
+
+td {
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+    color: #374151; /* Gray-700 */
+    border-bottom: 1px solid #e5e7eb; /* Gray-200 */
+}
+
+/* Status Colors */
+.text-green-600 {
+    color: var(--success-color);
+}
+
+.text-yellow-600 {
+    color: var(--warning-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .mdc-card {
+        padding: 1rem;
+    }
+
+    th, td {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .mdc-button {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Animation for status updates */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#generateStatus:not(:empty),
+#templateStatus:not(:empty),
+#validationStatus:not(:empty) {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4b5563; /* Gray-600 */
+}
