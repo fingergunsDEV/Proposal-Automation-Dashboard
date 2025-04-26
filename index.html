@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Proposal Automation Dashboard</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+
+		.mdc-button {
+			@apply bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover: bg-blue-600 transition duration-300;
+		}
+
+		.mdc-card {
+			@apply bg-white rounded-lg shadow-md p-6;
+		}
+	</style>
+	<style>
+		/* Modern Material Design Stylesheet */
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+		@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+		:root {
+			--primary-color: #3b82f6;
+			/* Blue-500 */
+			--primary-dark: #1d4ed8;
+			/* Blue-700 */
+			--secondary-color: #6b7280;
+			/* Gray-500 */
+			--surface-color: #ffffff;
+			/* White */
+			--background-color: #f3f4f6;
+			/* Gray-100 */
+			--success-color: #10b981;
+			/* Green-500 */
+			--warning-color: #f59e0b;
+			/* Yellow-500 */
+			--error-color: #ef4444;
+			/* Red-500 */
+			--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+			--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Roboto', sans-serif;
+			background-color: var(--background-color);
+			color: #1f2937;
+			/* Gray-900 */
+			line-height: 1.5;
+		}
+
+		/* Header Styles */
+		header {
+			background-color: var(--surface-color);
+			box-shadow: var(--shadow-sm);
+		}
+
+		header h1 {
+			font-size: 1.875rem;
+			font-weight: 700;
+			color: #111827;
+			/* Gray-900 */
+		}
+
+		/* Card Styles */
+		.mdc-card {
+			background-color: var(--surface-color);
+			border-radius: 0.5rem;
+			box-shadow: var(--shadow-md);
+			padding: 1.5rem;
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.mdc-card:hover {
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.mdc-card h2 {
+			font-size: 1.25rem;
+			font-weight: 500;
+			color: #1f2937;
+			/* Gray-900 */
+			margin-bottom: 1rem;
+		}
+
+		.mdc-card p {
+			color: var(--secondary-color);
+			font-size: 0.875rem;
+			margin-bottom: 1rem;
+		}
+
+		/* Button Styles */
+		.mdc-button {
+			display: inline-flex;
+			align-items: center;
+			background-color: var(--primary-color);
+			color: var(--surface-color);
+			font-weight: 500;
+			font-size: 0.875rem;
+			padding: 0.5rem 1rem;
+			border-radius: 0.375rem;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			transition: background-color 0.2s ease, transform 0.2s ease;
+		}
+
+		.mdc-button:hover {
+			background-color: var(--primary-dark);
+			transform: translateY(-1px);
+		}
+
+		.mdc-button:active {
+			transform: translateY(0);
+		}
+
+		.mdc-button .material-icons {
+			margin-right: 0.5rem;
+		}
+
+		/* Status Messages */
+		#generateStatus,
+		#templateStatus,
+		#validationStatus {
+			font-size: 0.875rem;
+			color: var(--secondary-color);
+			min-height: 1.5rem;
+		}
+
+		/* Table Styles */
+		table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0;
+		}
+
+		thead {
+			background-color: #f9fafb;
+			/* Gray-50 */
+		}
+
+		th {
+			font-size: 0.75rem;
+			font-weight: 500;
+			color: #6b7280;
+			/* Gray-500 */
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			padding: 0.75rem 1.5rem;
+			text-align: left;
+		}
+
+		tbody tr {
+			background-color: var(--surface-color);
+			transition: background-color 0.2s ease;
+		}
+
+		tbody tr:hover {
+			background-color: #f9fafb;
+			/* Gray-50 */
+		}
+
+		td {
+			padding: 1rem 1.5rem;
+			font-size: 0.875rem;
+			color: #374151;
+			/* Gray-700 */
+			border-bottom: 1px solid #e5e7eb;
+			/* Gray-200 */
+		}
+
+		/* Status Colors */
+		.text-green-600 {
+			color: var(--success-color);
+		}
+
+		.text-yellow-600 {
+			color: var(--warning-color);
+		}
+
+		/* Responsive Design */
+		@media (max-width: 768px) {
+			header h1 {
+				font-size: 1.5rem;
+			}
+
+			.mdc-card {
+				padding: 1rem;
+			}
+
+			th,
+			td {
+				padding: 0.5rem 1rem;
+				font-size: 0.75rem;
+			}
+
+			.mdc-button {
+				font-size: 0.75rem;
+				padding: 0.5rem 0.75rem;
+			}
+		}
+
+		@media (max-width: 640px) {
+			.grid {
+				grid-template-columns: 1fr;
+			}
+
+			table {
+				display: block;
+				overflow-x: auto;
+				white-space: nowrap;
+			}
+		}
+
+		/* Animation for status updates */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		#generateStatus:not(:empty),
+		#templateStatus:not(:empty),
+		#validationStatus:not(:empty) {
+			animation: fadeIn 0.3s ease-in;
+		}
+
+		/* Scrollbar Styling */
+		::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 4px;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: var(--secondary-color);
+			border-radius: 4px;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #4b5563;
+			/* Gray-600 */
+		}
+	</style>
+</head>
+
+<body class="bg-gray-100">
+	<div class="min-h-screen">
+		<!-- Header -->
+		<header class="bg-white shadow">
+			<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+				<h1 class="text-3xl font-bold text-gray-900">Proposal Automation Dashboard</h1>
+			</div>
+		</header>
+
+		<!-- Main Content -->
+		<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<!-- Generate Proposals Card -->
+				<div class="mdc-card">
+					<h2 class="text-xl font-semibold mb-4">Generate Proposals</h2>
+					<p class="text-gray-600 mb-4">Create proposals from spreadsheet data.</p>
+					<button id="generateProposals" class="mdc-button">
+						<span class="material-icons mr-2">description</span>
+						Generate Now
+					</button>
+					<div id="generateStatus" class="mt-4 text-sm text-gray-600"></div>
+				</div>
+
+				<!-- Refresh Templates Card -->
+				<div class="mdc-card">
+					<h2 class="text-xl font-semibold mb-4">Refresh Templates</h2>
+					<p class="text-gray-600 mb-4">Update document templates from source.</p>
+					<button id="refreshTemplates" class="mdc-button">
+						<span class="material-icons mr-2">refresh</span>
+						Refresh Templates
+					</button>
+					<div id="templateStatus" class="mt-4 text-sm text-gray-600"></div>
+				</div>
+
+				<!-- Update Validation Card -->
+				<div class="mdc-card">
+					<h2 class="text-xl font-semibold mb-4">Update Validation</h2>
+					<p class="text-gray-600 mb-4">Refresh data validation rules.</p>
+					<button id="updateValidation" class="mdc-button">
+						<span class="material-icons mr-2">rule</span>
+						Update Validation
+					</button>
+					<div id="validationStatus" class="mt-4 text-sm text-gray-600"></div>
+				</div>
+			</div>
+
+			<!-- Status Table -->
+			<div class="mt-8 mdc-card">
+				<h2 class="text-xl font-semibold mb-4">Recent Proposals</h2>
+				<div class="overflow-x-auto">
+					<table class="w-full text-sm text-left text-gray-500">
+						<thead class="text-xs text-gray-700 uppercase bg-gray-50">
+							<tr>
+								<th scope="col" class="px-6 py-3">Business Name</th>
+								<th scope="col" class="px-6 py-3">Location</th>
+								<th scope="col" class="px-6 py-3">Service</th>
+								<th scope="col" class="px-6 py-3">Status</th>
+								<th scope="col" class="px-6 py-3">Document ID</th>
+							</tr>
+						</thead>
+						<tbody id="proposalTable">
+							<!-- Populated by JavaScript -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<script>
+		// Simulated API calls to Google Apps Script Web App
+		const API_URL = 'https://script.google.com/macros/s/AKfycbxQf8zqbPWcgIt144U-s0kuHrtikqecftZIo-aUS9R5V1KUbWeX5oVAsLLSQEapoq6fTg/exec';
+		async function callAppsScript(functionName) {
+			try {
+				const response = await fetch(`${API_URL}?function=${functionName}`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
+				const result = await response.json();
+				return result;
+			} catch (error) {
+				console.error(`Error calling ${functionName}:`, error);
+				return {
+					status: 'error',
+					message: error.message
+				};
+			}
+		}
+		// Button event listeners
+		document.getElementById('generateProposals').addEventListener('click', async () => {
+			const statusDiv = document.getElementById('generateStatus');
+			statusDiv.textContent = 'Generating proposals...';
+			const result = await callAppsScript('generateProposals');
+			statusDiv.textContent = result.status === 'success' ?
+				'Proposals generated successfully!' :
+				`Error: ${result.message}`;
+			updateProposalTable();
+		});
+		document.getElementById('refreshTemplates').addEventListener('click', async () => {
+			const statusDiv = document.getElementById('templateStatus');
+			statusDiv.textContent = 'Refreshing templates...';
+			const result = await callAppsScript('refreshTemplates');
+			statusDiv.textContent = result.status === 'success' ?
+				'Templates refreshed!' :
+				`Error: ${result.message}`;
+		});
+		document.getElementById('updateValidation').addEventListener('click', async () => {
+			const statusDiv = document.getElementById('validationStatus');
+			statusDiv.textContent = 'Updating validation...';
+			const result = await callAppsScript('createDataValidation');
+			statusDiv.textContent = result.status === 'success' ?
+				'Validation updated!' :
+				`Error: ${result.message}`;
+		});
+		async function updateProposalTable() {
+  const tbody = document.getElementById('proposalTable');
+  tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Loading proposals...</td></tr>';
+
+  try {
+    const response = await fetch(`${API_URL}?function=getProposalData`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const result = await response.json();
+
+    if (result.status !== 'success') throw new Error(result.message);
+
+    tbody.innerHTML = '';
+    result.data.forEach(proposal => {
+      const row = document.createElement('tr');
+      row.className = 'bg-white border-b hover:bg-gray-50';
+      row.innerHTML = `
+        <td class="px-6 py-4 font-medium text-gray-900">${proposal.businessName}</td>
+        <td class="px-6 py-4">${proposal.location}</td>
+        <td class="px-6 py-4">${proposal.service}</td>
+        <td class="px-6 py-4">
+          <span class="px-2 py-1 rounded-full ${
+            proposal.status === 'Completed' 
+              ? 'bg-green-100 text-green-800' 
+              : 'bg-yellow-100 text-yellow-800'
+          }">
+            ${proposal.status}
+          </span>
+        </td>
+        <td class="px-6 py-4">
+          <a href="https://docs.google.com/document/d/${proposal.docId}" 
+             target="_blank" 
+             class="text-blue-500 hover:underline">
+            ${proposal.docId}
+          </a>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+
+  } catch (error) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" class="text-center py-4 text-red-500">
+          Error loading data: ${error.message}
+        </td>
+      </tr>
+    `;
+  }
+}
+
+			proposals.forEach(proposal => {
+				const row = document.createElement('tr');
+				row.className = 'bg-white border-b';
+				row.innerHTML = `
+                    <td class="px-6 py-4">${proposal.businessName}</td>
+                    <td class="px-6 py-4">${proposal.location}</td>
+                    <td class="px-6 py-4">${proposal.service}</td>
+                    <td class="px-6 py-4">
+                        <span class="${proposal.status === 'Completed' ? 'text-green-600' : 'text-yellow-600'}">
+                            ${proposal.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">${proposal.docId}</td>
+                `;
+				tbody.appendChild(row);
+			});
+		}
+		// Initial table load
+		updateProposalTable();
+	</script>
+</body>
+
+</html>
